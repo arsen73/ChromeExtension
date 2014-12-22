@@ -1,0 +1,15 @@
+{
+"chrome_extension_description": {
+"message": "Удобный блокнот для записи ваших почтовых треков. Позволяет посмотреть состояние посылки одним кликом."
+},
+"chrome_extension_name": {
+"message": "17 Track net блокнот"
+},
+"some_string": {
+"message": "Текст"
+},
+
+"lang": {
+"message": "ru"
+}
+}

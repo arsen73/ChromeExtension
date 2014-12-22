@@ -1,0 +1,100 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/17track_api_p.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+<style type="text/css">
+body{
+	text-align: center;
+}
+.content{
+	width: 1000px;
+	margin: auto;
+}
+.cursor{
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+<div class="well content">
+	<div class="row">
+		<div class="col-md-5">
+			<h3>chrome.i18n.getMessage("some_string")</h3>
+			<div>
+				<div id="message"></div>
+				<div class="form-group">
+					<input type="text" class="form-control" id="trackNumber" placeholder="Введите трек код">
+				</div>
+				<div class="form-group">
+					<textarea class="form-control" rows="3" placeholder="Добавить описание" maxlenght="100" id="trackDescription"></textarea>
+				</div>
+				<div>
+					<button type="button" class="btn btn-success" id="add_track">Сохранить</button>
+				</div>	
+			</div>	
+		</div>
+		<div class="col-md-7">
+			<h3>Мои трек коды</h3>
+			<table class="table table-hover">
+				<thead>
+			  		<tr><th class="col-md-3">Трек код</th><th class="col-md-3">Описание</th><th class="col-md-1"></th></tr>
+			  	</thead>
+			  	<tbody id="listTrackTable">
+			  	</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="trackModal">
+  <div class="modal-dialog" style="width:850px">
+    <div class="modal-content" style="width:850px">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
+        <h4 class="modal-title">Проверка кода</h4>
+      </div>
+      <div class="modal-body">
+        <div id="track_container"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- js template -->
+<script id="success_add_div" type="text/html">
+<div class="alert alert-success alert-dismissible" role="alert">
+	<button type="button" class="close" data-dismiss="alert">
+		<span aria-hidden="true">&times;</span>
+		<span class="sr-only">закрыть</span>
+	</button>
+	Трек код сохранён.
+</div>
+</script>
+
+<script id="tr_track" type="text/html">
+<tr> 
+	<td>{code}</td> 
+	<td>{description}</td> 
+  	<td class="action"> 
+  		<span class="glyphicon glyphicon-repeat cursor" data-id="{code}"></span> 
+  		<span class="glyphicon glyphicon-pencil cursor" data-id="{code}"></span> 
+  		<span class="glyphicon glyphicon-trash cursor" data-id="{code}"></span> 
+	</td> 
+</tr>
+</script>
+
+</body>
+</html>
