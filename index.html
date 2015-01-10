@@ -27,60 +27,66 @@ body{
 </head>
 <body>
 <div class="well content">
-	<div class="row">
-		<div class="col-md-5">
-			<h3>chrome.i18n.getMessage("some_string")</h3>
-			<div>
-				<div id="message"></div>
-				<div class="form-group">
-					<input type="text" class="form-control" id="trackNumber" placeholder="Введите трек код">
-				</div>
-				<div class="form-group">
-					<textarea class="form-control" rows="3" placeholder="Добавить описание" maxlenght="100" id="trackDescription"></textarea>
-				</div>
-				<div>
-					<button type="button" class="btn btn-success" id="add_track">Сохранить</button>
-				</div>	
-			</div>	
-		</div>
-		<div class="col-md-7">
-			<h3>Мои трек коды</h3>
-			<table class="table table-hover">
-				<thead>
-			  		<tr><th class="col-md-3">Трек код</th><th class="col-md-3">Описание</th><th class="col-md-1"></th></tr>
-			  	</thead>
-			  	<tbody id="listTrackTable">
-			  	</tbody>
-			</table>
-		</div>
+	<div class="row" id="main_content">
+
 	</div>
 </div>
 
 <div class="modal fade" id="trackModal">
+
+</div><!-- /.modal -->
+
+<!-- js template -->
+<script id="tpl_trackModal" type="text/html">
   <div class="modal-dialog" style="width:850px">
     <div class="modal-content" style="width:850px">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Закрыть</span></button>
-        <h4 class="modal-title">Проверка кода</h4>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{close}</span></button>
+        <h4 class="modal-title">{check_code}</h4>
       </div>
       <div class="modal-body">
         <div id="track_container"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{close}</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-
-<!-- js template -->
+</script>
+<script id="tpl_main_content" type="text/html">
+  <div class="col-md-5">
+      <h3>{package_tracking_title}</span></h3>
+      <div>
+  <div id="message"></div>
+  <div class="form-group">
+      <input type="text" class="form-control" id="trackNumber" placeholder="{enter_track_cod}">
+      </div>
+  <div class="form-group">
+      <textarea class="form-control" rows="3" placeholder="{added_description}" maxlenght="100" id="trackDescription"></textarea>
+  </div>
+      <div>
+  <button type="button" class="btn btn-success" id="add_track">{add_cod}</span></button>
+  </div>
+  </div>
+  </div>
+  <div class="col-md-7">
+      <h3>{my_track_cod}</h3>
+  <table class="table table-hover">
+      <thead>
+      <tr><th class="col-md-3">{track_code}</th><th class="col-md-3">{description}</th><th class="col-md-1"></th></tr>
+  </thead>
+  <tbody id="listTrackTable">
+      </tbody>
+  </table>
+  </div>
+</script>
 <script id="success_add_div" type="text/html">
 <div class="alert alert-success alert-dismissible" role="alert">
 	<button type="button" class="close" data-dismiss="alert">
 		<span aria-hidden="true">&times;</span>
-		<span class="sr-only">закрыть</span>
+		<span class="sr-only">{close}</span>
 	</button>
-	Трек код сохранён.
+	{track_cod_is_save}
 </div>
 </script>
 

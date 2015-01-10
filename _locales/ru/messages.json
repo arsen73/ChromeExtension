@@ -1,15 +1,41 @@
 {
-"chrome_extension_description": {
-"message": "Удобный блокнот для записи ваших почтовых треков. Позволяет посмотреть состояние посылки одним кликом."
-},
-"chrome_extension_name": {
-"message": "17 Track net блокнот"
-},
-"some_string": {
-"message": "Текст"
-},
-
-"lang": {
-"message": "ru"
-}
+  "chrome_extension_description": {
+  "message": "Удобный блокнот для записи ваших почтовых треков. Позволяет посмотреть состояние посылки одним кликом."
+  },
+  "chrome_extension_name": {
+  "message": "17 Track net блокнот"
+  },
+  "close": {
+  "message": "Закрыть"
+  },
+  "check_code": {
+    "message": "Проверка кода"
+  },
+  "package_tracking_title": {
+    "message": "Отслеживание посылок"
+  },
+  "enter_track_cod": {
+    "message": "Введите трек код"
+  },
+  "my_track_cod": {
+    "message": "Мои трек коды"
+  },
+  "track_code": {
+    "message": "Трек код"
+  },
+  "description": {
+    "message": "Описание"
+  },
+  "track_code_is_save": {
+    "message": "Трек код сохранён."
+  },
+  "added_description": {
+    "message": "Добавить описание"
+  },
+  "add_cod": {
+    "message": "Save"
+  },
+  "lang": {
+    "message": "ru"
+  }
 }

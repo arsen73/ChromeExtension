@@ -1,15 +1,41 @@
 {
-"chrome_extension_description": {
-"message": "Handy notebook to record your postal tracks. Allows you to see the state of sending a single click."
-},
-"chrome_extension_name": {
-"message": "17 track net bookmarks"
-},
-"title_form": {
-"message": ""
-},
-
-"lang": {
-"message": "en"
-}
+  "chrome_extension_description": {
+  "message": "Handy notebook to record your postal tracks. Allows you to see the state of sending a single click."
+  },
+  "chrome_extension_name": {
+  "message": "17 Track net bookmarks"
+  },
+  "close": {
+  "message": "Close"
+  },
+  "check_code": {
+  "message": "Verification code"
+  },
+  "package_tracking_title": {
+  "message": "Package Tracking"
+  },
+  "enter_track_cod": {
+  "message": "Enter the code track"
+  },
+  "my_track_cod": {
+  "message": "My track codes"
+  },
+  "track_code": {
+  "message": "Track code"
+  },
+  "description": {
+  "message": "Description"
+  },
+  "track_code_is_save": {
+  "message": "Track code saved."
+  },
+  "added_description": {
+  "message": "Add description"
+  },
+  "add_cod": {
+    "message": "Save"
+  },
+  "lang": {
+  "message": "en"
+  }
 }
