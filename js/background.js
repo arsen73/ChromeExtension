@@ -1,4 +1,5 @@
 var entryToLoad = null;
+var chr = null;
 
 function init(launchData) {
   var fileEntry = null
@@ -7,14 +8,14 @@ function init(launchData) {
   }
 
   var options = {
-    frame: 'chrome',
-    minWidth: 850,
-    minHeight: 400,
-    width: 850,
-    height: 700
+    id: 'trackW',
+    innerBounds:{
+      minWidth: 1000,
+      minHeight: 600
+    }
   };
-
+  chr = chrome;
   chrome.app.window.create('index.html', options);
+  chrome.storage.local.set({'dw': 'dddd'});
 }
-
 chrome.app.runtime.onLaunched.addListener(init);

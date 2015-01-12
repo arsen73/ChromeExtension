@@ -35,6 +35,9 @@
   "add_cod": {
     "message": "Save"
   },
+  "track_cod_is_save": {
+    "message": "Success. Track number added."
+  },
   "lang": {
   "message": "en"
   }
