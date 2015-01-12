@@ -6,7 +6,7 @@ var translate_w = {
   'my_track_cod': chrome.i18n.getMessage("my_track_cod"),
   'track_code': chrome.i18n.getMessage("track_code"),
   'description': chrome.i18n.getMessage("description"),
-  'track_code_is_save': chrome.i18n.getMessage("track_code_is_save"),
+  'track_cod_is_save': chrome.i18n.getMessage("track_cod_is_save"),
   'added_description': chrome.i18n.getMessage("added_description"),
   'add_cod': chrome.i18n.getMessage("add_cod")
 };
@@ -22,106 +22,124 @@ $.nano = function (template, data) {
 
 // сохранение трека
 function addTrackCode(code, description) {
-  var new_obj = {code: code, description: description};
-  var my_track_list = localStorage.getItem("my_track_list");
-  if (!my_track_list) {
-    my_track_list = [];
-    my_track_list.push(JSON.stringify(new_obj));
-  } else {
-    my_track_list = JSON.parse(my_track_list);
-    // ищем такой трек, возможно он уже есть
-    var index = false;
-    $.each(my_track_list, function (i, o) {
-      o = JSON.parse(o);
-      if (o.code == code) {
-        index = i;
-      }
-    });
-    if (index)
-      my_track_list[index] = JSON.stringify(new_obj);
-    else
+  chrome.storage.local.get("my_track_list", function(result){
+    var new_obj = {code: code, description: description};
+    var my_track_list = result["my_track_list"];
+
+    if (!my_track_list) {
+      my_track_list = [];
       my_track_list.push(JSON.stringify(new_obj));
-  }
-  //parseJSON
-  localStorage.setItem("my_track_list", JSON.stringify(my_track_list));
-  $('#message').html($.nano($('#success_add_div'), {}));
-  refreshListTrack();
+    } else {
+      my_track_list = JSON.parse(my_track_list);
+      // ищем такой трек, возможно он уже есть
+      var index = false;
+      $.each(my_track_list, function (i, o) {
+        o = JSON.parse(o);
+        if (o.code == code) {
+          index = i;
+        }
+      });
+      if (index)
+        my_track_list[index] = JSON.stringify(new_obj);
+      else
+        my_track_list.push(JSON.stringify(new_obj));
+    }
+    //parseJSON
+    setI("my_track_list", JSON.stringify(my_track_list));
+    $('#message').html($.nano($('#success_add_div'), translate_w));
+    refreshListTrack();
+  });
 }
 // обновление списка треков
 function refreshListTrack() {
-  var content = '';
-  var my_track_list = localStorage.getItem("my_track_list");
-  if (!my_track_list)
-    return false;
-  my_track_list = JSON.parse(my_track_list);
+  chrome.storage.local.get("my_track_list", function(result){
+    var content = '';
+    var my_track_list = result["my_track_list"];
+    if (!my_track_list)
+      return false;
+    my_track_list = JSON.parse(my_track_list);
 
-  $.each(my_track_list, function (i, o) {
-    o = JSON.parse(o);
-    content += $.nano($('#tr_track'), o);
-  });
-  $('#listTrackTable').html(content);
-  $('.action .glyphicon-trash').on('click', function () {
-    deleteTrack($(this).data('id'));
-  });
-  $('.action .glyphicon-repeat').on('click', function () {
-    checkTrack($(this).data('id'));
-  });
-  $('.action .glyphicon-pencil').on('click', function () {
-    editTrack($(this).data('id'));
+    $.each(my_track_list, function (i, o) {
+      o = JSON.parse(o);
+      content += $.nano($('#tr_track'), o);
+    });
+    $('#listTrackTable').html(content);
+    $('.action .glyphicon-trash').on('click', function () {
+      deleteTrack($(this).data('id'));
+    });
+    $('.action .glyphicon-repeat').on('click', function () {
+      checkTrack($(this).data('id'));
+    });
+    $('.action .glyphicon-pencil').on('click', function () {
+      editTrack($(this).data('id'));
+    });
   });
 }
 // удаление трека
 function deleteTrack(track) {
-  var my_track_list = localStorage.getItem("my_track_list");
-  if (!my_track_list)
-    return false;
-  my_track_list = JSON.parse(my_track_list);
-  var index;
-  $.each(my_track_list, function (i, o) {
-    o = JSON.parse(o);
-    if (o.code == track) {
-      index = i;
-    }
+  chrome.storage.local.get("my_track_list", function(result){
+    var my_track_list = result["my_track_list"];
+    if (!my_track_list)
+      return false;
+    my_track_list = JSON.parse(my_track_list);
+    var index;
+    $.each(my_track_list, function (i, o) {
+      o = JSON.parse(o);
+      if (o.code == track) {
+        index = i;
+      }
+    });
+    my_track_list.splice(index, 1);
+    setI("my_track_list", JSON.stringify(my_track_list));
+    refreshListTrack();
   });
-  my_track_list.splice(index, 1);
-  localStorage.setItem("my_track_list", JSON.stringify(my_track_list));
-  refreshListTrack();
 }
 
 //редактирование трека
 function editTrack(track) {
-  var my_track_list = localStorage.getItem("my_track_list");
-  if (!my_track_list || !track)
-    return false;
-  my_track_list = JSON.parse(my_track_list);
-  var index;
-  $.each(my_track_list, function (i, o) {
-    o = JSON.parse(o);
-    if (o.code == track) {
-      index = i;
-    }
+  chrome.storage.local.get("my_track_list", function(result){
+    var my_track_list = result["my_track_list"];
+    if (!my_track_list || !track)
+      return false;
+    my_track_list = JSON.parse(my_track_list);
+    var index;
+    $.each(my_track_list, function (i, o) {
+      o = JSON.parse(o);
+      if (o.code == track) {
+        index = i;
+      }
+    });
+    var obj = JSON.parse(my_track_list[index]);
+    $('#trackNumber').val(obj.code);
+    $('#trackDescription').val(obj.description);
   });
-  var obj = JSON.parse(my_track_list[index]);
-  $('#trackNumber').val(obj.code);
-  $('#trackDescription').val(obj.description);
 }
 
 // проверка трека
 function checkTrack(track) {
-  yqtrack_v4({
-    container: document.getElementById('track_container'),
-    width: 800,
-    height: 600,
-    num: track,
-    et: 0,
-    lng: 'ru'
-  });
+//  yqtrack_v4({
+//    container: document.getElementById('track_container'),
+//    width: 800,
+//    height: 600,
+//    num: track,
+//    et: 0,
+//    lng: 'ru'
+//  });
+  $('#track_container').css("width", "800px");
+  $('#track_container').css("height", "600px");
+  $('#track_container').attr("src", "http://www.17track.net/api/ru/result/post.shtml?lo=ecmgijfobigpnphdjenmagledgfdgkok&num="+track+"&et=0&theme=default&r="+Math.random());
   $('#trackModal').modal();
 }
 // загрузка основных шаблонов, подстановка текста
 function init_app() {
   $('#main_content').html($.nano($('#tpl_main_content'), translate_w));
   $('#trackModal').html($.nano($('#tpl_trackModal'), translate_w));
+}
+
+function setI(key, value){
+  var obj = {};
+  obj[key]=value;
+  chrome.storage.local.set(obj);
 }
 
 $(document).ready(function () {

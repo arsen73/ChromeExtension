@@ -11,12 +11,13 @@
   },
   "offline_enabled": false,
   "app": {
-    "launch": {
-      "local_path": "index.html"
+    "background": {
+      "scripts": ["js/background.js"]
     }
   },
   "permissions": [
-    "http://www.17track.net/*",
-    "unlimitedStorage"
+    "unlimitedStorage",
+    "storage",
+    "webview"
   ]
 }
